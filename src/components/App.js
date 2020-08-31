@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      myAppoitments: []
+      myAppointments: []
     };
   }
 
@@ -26,13 +26,20 @@ class App extends Component {
   }
 
   render() {
+    const listItems = this.state.myAppointments.map(item => (
+      <div>
+        <div>{item.petName}</div>
+        <div>{item.ownerName}</div>
+      </div>
+    ));
+
     return (
       <main className="page bg-white" id="petratings">
         <div className="container">
           <div className="row">
             <div className="col-md-12 bg-white">
               <div className="container">
-                { this.state.name }
+                { listItems }
                 <AddAppointments />
                 <SearchAppointments />
                 <ListAppointments />
