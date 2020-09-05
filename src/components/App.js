@@ -14,16 +14,23 @@ class App extends Component {
       lastIndex: 0
     };
     this.deleteAppointment = this.deleteAppointment.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
   }
 
-deleteAppointment(apt) {
-  let tempApts = this.state.myAppointments;
-  tempApts = without(tempApts, apt);
-  
-  this.setState({
-    myAppointments: tempApts
-  });
-}
+  toggleForm() {
+    this.setState({
+      formDisplay: !this.state.formDisplay
+    });
+  }
+
+  deleteAppointment(apt) {
+    let tempApts = this.state.myAppointments;
+    tempApts = without(tempApts, apt);
+    
+    this.setState({
+      myAppointments: tempApts
+    });
+  }
 
   componentDidMount() {
     fetch('./data.json')
@@ -47,7 +54,10 @@ deleteAppointment(apt) {
           <div className="row">
             <div className="col-md-12 bg-white">
               <div className="container">
-                <AddAppointments formDisplay={this.state.formDisplay} />
+                <AddAppointments
+                  formDisplay={this.state.formDisplay}
+                  toggleForm={this.toggleForm}
+                />
                 <SearchAppointments />
                 <ListAppointments
                   appointments={this.state.myAppointments}
