@@ -12,6 +12,28 @@ class AddAppointments extends Component {
       aptNotes: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+  }
+
+  handleAdd(e) {
+    e.preventDefault();
+    let tempApt = {
+      petName: this.state.petName,
+      ownerName: this.state.ownerName,
+      aptDate: this.state.aptDate + ' ' + this.state.aptTime,
+      aptNotes: this.state.aptNotes
+    };
+
+    this.props.addAppointment(tempApt);
+
+    this.setState({
+      petName: '',
+      ownerName: '',
+      aptDate: '',
+      aptTime: '',
+      aptNotes: ''
+    });
+    this.props.toggleForm();
   }
 
   handleChange(e) {
